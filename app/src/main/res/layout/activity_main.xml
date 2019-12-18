@@ -35,11 +35,13 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/prev_button" />
+            android:text="@string/prev_button"
+            android:drawableStart="@drawable/arrow_left"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/next_button" />
+            android:text="@string/next_button"
+            android:drawableEnd="@drawable/arrow_right"/>
     </LinearLayout>
 
     <Button
