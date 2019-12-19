@@ -3,6 +3,7 @@ package com.bignerdranch.android.geoquiz_2
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 
 class MainActivity : AppCompatActivity() {
@@ -22,12 +23,12 @@ class MainActivity : AppCompatActivity() {
 
         trueButton = findViewById(R.id.true_button)
         trueButton.setOnClickListener {
-            //TODO: check answer
+            checkAnswer(true)
         }
 
         falseButton = findViewById(R.id.false_button)
         falseButton.setOnClickListener {
-            //TODO: check answer
+            checkAnswer(false)
         }
 
         previousButton = findViewById(R.id.prev_button)
@@ -44,5 +45,17 @@ class MainActivity : AppCompatActivity() {
         cheatButton.setOnClickListener {
             //TODO: cheat
         }
+    }
+
+    private fun checkAnswer(userAnswer: Boolean) {
+        val correctAnswer = quizViewModel.currentQuestionAnswer
+
+        val resultStrId = when {
+            quizViewModel.isCheater -> R.string.cheat_toast
+            userAnswer == correctAnswer -> R.string.correct_toast
+            else -> R.string.wrong_toast
+        }
+
+        Toast.makeText(this, resultStrId, Toast.LENGTH_SHORT).show()
     }
 }
