@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             quizViewModel.moveToNextQuestion()
             updateQuestion()
         }
+        updateQuestion()
 
         trueButton = findViewById(R.id.true_button)
         trueButton.setOnClickListener {
