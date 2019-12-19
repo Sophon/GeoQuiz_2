@@ -37,13 +37,14 @@ class MainActivity : AppCompatActivity() {
 
         previousButton = findViewById(R.id.prev_button)
         previousButton.setOnClickListener {
-            //TODO: previous question
+            quizViewModel.moveToPreviousQuestion()
+            updateQuestion()
         }
 
         nextButton = findViewById(R.id.next_button)
         nextButton.setOnClickListener {
             quizViewModel.moveToNextQuestion()
-
+            updateQuestion()
         }
 
         cheatButton = findViewById(R.id.cheat_button)
@@ -65,6 +66,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateQuestion() {
-
+        questionTextView.setText(quizViewModel.currentQuestionText)
     }
 }
