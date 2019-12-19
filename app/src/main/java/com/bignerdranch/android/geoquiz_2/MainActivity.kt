@@ -3,10 +3,12 @@ package com.bignerdranch.android.geoquiz_2
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var questionTextView: TextView
     private lateinit var falseButton: Button
     private lateinit var trueButton: Button
     private lateinit var previousButton: Button
@@ -20,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        questionTextView = findViewById(R.id.question_text_view)
 
         trueButton = findViewById(R.id.true_button)
         trueButton.setOnClickListener {
@@ -38,7 +42,8 @@ class MainActivity : AppCompatActivity() {
 
         nextButton = findViewById(R.id.next_button)
         nextButton.setOnClickListener {
-            //TODO: next question
+            quizViewModel.moveToNextQuestion()
+
         }
 
         cheatButton = findViewById(R.id.cheat_button)
@@ -57,5 +62,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         Toast.makeText(this, resultStrId, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun updateQuestion() {
+
     }
 }
