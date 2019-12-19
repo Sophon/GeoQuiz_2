@@ -27,6 +27,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        quizViewModel.currentIndex =
+            savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
+
         questionTextView = findViewById(R.id.question_text_view)
 
         trueButton = findViewById(R.id.true_button)
