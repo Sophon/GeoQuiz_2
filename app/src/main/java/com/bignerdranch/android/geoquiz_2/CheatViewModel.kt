@@ -4,4 +4,5 @@ import androidx.lifecycle.ViewModel
 
 class CheatViewModel: ViewModel() {
     var hasCheated = false
+    var answer = false
 }

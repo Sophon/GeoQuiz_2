@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 
 private const val TAG = "MainActivity"
 private const val KEY_INDEX = "index"
+private const val REQUEST_CODE_CHEAT = 0
 
 class MainActivity : AppCompatActivity() {
     private lateinit var questionTextView: TextView
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             val answerIsTrue = quizViewModel.currentQuestionAnswer
             val cheatIntent =
                 CheatActivity.newIntent(this@MainActivity, answerIsTrue)
-            startActivity(cheatIntent)
+            startActivityForResult(cheatIntent, REQUEST_CODE_CHEAT)
         }
     }
 
