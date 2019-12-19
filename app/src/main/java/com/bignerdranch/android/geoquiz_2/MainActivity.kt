@@ -31,6 +31,10 @@ class MainActivity : AppCompatActivity() {
             savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
 
         questionTextView = findViewById(R.id.question_text_view)
+        questionTextView.setOnClickListener {
+            quizViewModel.moveToNextQuestion()
+            updateQuestion()
+        }
 
         trueButton = findViewById(R.id.true_button)
         trueButton.setOnClickListener {
