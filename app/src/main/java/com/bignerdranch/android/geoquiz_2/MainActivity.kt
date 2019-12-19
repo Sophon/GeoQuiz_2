@@ -1,9 +1,11 @@
 package com.bignerdranch.android.geoquiz_2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
@@ -15,8 +17,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var questionTextView: TextView
     private lateinit var falseButton: Button
     private lateinit var trueButton: Button
-    private lateinit var previousButton: Button
-    private lateinit var nextButton: Button
+    private lateinit var previousButton: ImageButton
+    private lateinit var nextButton: ImageButton
     private lateinit var cheatButton: Button
 
     private val quizViewModel: QuizViewModel by lazy {
@@ -60,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         cheatButton = findViewById(R.id.cheat_button)
         cheatButton.setOnClickListener {
-            //TODO: cheat
+            startActivity(Intent(this, CheatActivity::class.java))
         }
     }
 
