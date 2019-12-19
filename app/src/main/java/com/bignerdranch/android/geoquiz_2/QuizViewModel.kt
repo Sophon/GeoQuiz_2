@@ -13,7 +13,11 @@ class QuizViewModel: ViewModel() {
     )
 
     var currentIndex = 0
-    var isCheater = false
+    var isCheater: Boolean
+        get() = questionBank[currentIndex].hasCheated
+        set(value) {
+            questionBank[currentIndex].hasCheated = value
+        }
 
     val currentQuestionAnswer: Boolean
         get() = questionBank[currentIndex].answer
