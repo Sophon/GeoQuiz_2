@@ -2,10 +2,14 @@ package com.bignerdranch.android.geoquiz_2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
+
+private const val TAG = "MainActivity"
+private const val KEY_INDEX = "index"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var questionTextView: TextView
@@ -22,6 +26,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        quizViewModel.currentIndex =
+            savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
 
         questionTextView = findViewById(R.id.question_text_view)
 
@@ -51,6 +58,17 @@ class MainActivity : AppCompatActivity() {
         cheatButton.setOnClickListener {
             //TODO: cheat
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop: called")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putInt(KEY_INDEX, quizViewModel.currentIndex)
     }
 
     private fun checkAnswer(userAnswer: Boolean) {
