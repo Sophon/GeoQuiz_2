@@ -13,6 +13,7 @@
     <string name="cheat_toast">Cheating is wrong!</string>
     <string name="default_answer_text">Answer</string>
     <string name="warning_text">Are you sure you want to do this?</string>
+    <string name="api_text">API Level %d</string>
 
     <string name="question_australia">Canberra is the capital of Australia</string>
     <string name="question_oceans">The Pacific Ocean is larger than the Atlantic Ocean.</string>

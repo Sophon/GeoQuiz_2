@@ -3,6 +3,7 @@ package com.bignerdranch.android.geoquiz_2
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +19,7 @@ private const val EXTRA_ANSWER_IS_TRUE = "com.bignerdranch.android.geoquiz.answe
 class CheatActivity : AppCompatActivity() {
     private lateinit var showAnswerButton: Button
     private lateinit var answerTextView: TextView
+    private lateinit var versionTextView: TextView
 
     private val cheatViewModel: CheatViewModel by lazy {
         ViewModelProviders.of(this).get(CheatViewModel::class.java)
@@ -38,6 +40,9 @@ class CheatActivity : AppCompatActivity() {
             revealAnswer()
             setAnswerShown()
         }
+
+        versionTextView = findViewById(R.id.version_text_view)
+        versionTextView.text = getString(R.string.api_text, Build.VERSION.SDK_INT)
 
         setResult(Activity.RESULT_OK, cheatViewModel.returnIntent)
     }
