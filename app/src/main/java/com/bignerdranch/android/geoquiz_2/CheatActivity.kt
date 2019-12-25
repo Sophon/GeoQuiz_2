@@ -29,6 +29,7 @@ class CheatActivity : AppCompatActivity() {
             intent.getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false)
 
         answerTextView = findViewById(R.id.answer_text_view)
+        answerTextView.setText(cheatViewModel.answerText)
 
         showAnswerButton = findViewById(R.id.show_answer_button)
         showAnswerButton.setOnClickListener {
@@ -46,12 +47,12 @@ class CheatActivity : AppCompatActivity() {
     }
 
     private fun revealAnswer() {
-        answerTextView.setText(
+        cheatViewModel.answerText =
             when(cheatViewModel.answer) {
                 true -> R.string.true_button
                 else -> R.string.false_button
             }
-        )
+        answerTextView.setText(cheatViewModel.answerText)
         cheatViewModel.hasCheated = true
     }
 
