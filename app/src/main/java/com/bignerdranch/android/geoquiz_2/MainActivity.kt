@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         cheatButton = findViewById(R.id.cheat_button)
+        cheatButton.isEnabled = quizViewModel.cheatingEnabled
         cheatButton.setOnClickListener {view ->
             val answerIsTrue = quizViewModel.currentQuestionAnswer
             val cheatIntent =
@@ -81,6 +82,7 @@ class MainActivity : AppCompatActivity() {
                 startActivityForResult(cheatIntent, REQUEST_CODE_CHEAT)
             }
         }
+
     }
 
     override fun onStop() {
@@ -98,6 +100,11 @@ class MainActivity : AppCompatActivity() {
         if(requestCode == REQUEST_CODE_CHEAT) {
             quizViewModel.isCheater =
                 data?.getBooleanExtra(EXTRA_ANSWER_SHOWN, false) ?: false
+
+            if(quizViewModel.isCheater) {
+                quizViewModel.userCheated()
+                cheatButton.isEnabled = quizViewModel.cheatingEnabled
+            }
         }
     }
 
