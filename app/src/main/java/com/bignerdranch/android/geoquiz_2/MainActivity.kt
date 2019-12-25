@@ -1,7 +1,10 @@
 package com.bignerdranch.android.geoquiz_2
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -27,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         ViewModelProviders.of(this).get(QuizViewModel::class.java)
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -64,12 +68,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         cheatButton = findViewById(R.id.cheat_button)
-        cheatButton.setOnClickListener {
+        cheatButton.isEnabled = quizViewModel.cheatingEnabled
+        cheatButton.setOnClickListener {view ->
             val answerIsTrue = quizViewModel.currentQuestionAnswer
             val cheatIntent =
                 CheatActivity.newIntent(this@MainActivity, answerIsTrue)
-            startActivityForResult(cheatIntent, REQUEST_CODE_CHEAT)
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val options = ActivityOptions
+                    .makeClipRevealAnimation(view, 0, 0, view.width, view.height)
+                startActivityForResult(cheatIntent, REQUEST_CODE_CHEAT, options.toBundle())
+            } else {
+                startActivityForResult(cheatIntent, REQUEST_CODE_CHEAT)
+            }
         }
+
     }
 
     override fun onStop() {
@@ -87,6 +100,11 @@ class MainActivity : AppCompatActivity() {
         if(requestCode == REQUEST_CODE_CHEAT) {
             quizViewModel.isCheater =
                 data?.getBooleanExtra(EXTRA_ANSWER_SHOWN, false) ?: false
+
+            if(quizViewModel.isCheater) {
+                quizViewModel.userCheated()
+                cheatButton.isEnabled = quizViewModel.cheatingEnabled
+            }
         }
     }
 
